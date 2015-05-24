@@ -77,11 +77,5 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
 production:
-  <<: *default
-  database: liturgical_shop_production
-  username: liturgical_shop
-  password: <%= ENV['LITURGICAL_SHOP_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
