@@ -230,6 +230,8 @@ GEM
     premailer-rails (1.8.1)
       actionmailer (>= 3, < 5)
       premailer (~> 1.7, >= 1.7.9)
+    puma (2.11.3)
+      rack (>= 1.1, < 2.0)
     rabl (0.9.4.pre1)
       activesupport (>= 2.3.14)
     rack (1.6.1)
@@ -340,6 +342,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   pg
+  puma
   rails (= 4.2.1)
   rails_12factor
   sass-rails (~> 5.0)
