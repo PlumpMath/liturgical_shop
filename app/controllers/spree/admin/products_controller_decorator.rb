@@ -1,5 +1,5 @@
 Spree::Admin::ProductsController.class_eval do
-  before_filter :load_shipping_methods, only: [:new, :create]
+  before_filter :load_shipping_methods, only: [:new, :create, :edit, :update]
 
   private
 
