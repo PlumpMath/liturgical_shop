@@ -35,5 +35,10 @@ module LiturgicalShop
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Override list of shipping calculators
+    initializer 'spree.register.calculators' do |app|
+      app.config.spree.calculators.shipping_methods = [MostExpensiveShippingCalculator]
+    end
   end
 end
