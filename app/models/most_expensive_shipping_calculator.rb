@@ -1,14 +1,20 @@
 # encoding: utf-8
 class MostExpensiveShippingCalculator < Spree::ShippingCalculator
-  preference :price, :decimal, default: 0.0
-
   def self.description
     "Najdroższa wygrywa"
   end
 
   def compute_package(package)
-    binding.pry
+    biggest_shipping_cost_for(package)
+  end
 
-    11.0
+  private
+
+  def biggest_shipping_cost_for(package)
+    shipping_costs = package.contents.map do |content|
+      content.line_item.product.shipping_cost
+    end
+
+    shipping_costs.max
   end
 end
