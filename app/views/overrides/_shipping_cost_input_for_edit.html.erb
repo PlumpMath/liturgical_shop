@@ -1,0 +1,7 @@
+<div data-hook="admin_product_form_shipping_cost">
+  <%= f.field_container :shipping_cost, class: ['form-group'] do %>
+    <%= f.label :shipping_cost, 'Koszt wysyłki' %>
+    <%= f.text_field :shipping_cost, value: number_to_currency(@product.shipping_cost, unit: ''), class: 'form-control', disabled: (cannot? :update, Spree::Price) %>
+    <%= f.error_message_on :shipping_cost %>
+  <% end %>
+</div>

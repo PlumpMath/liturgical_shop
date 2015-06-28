@@ -1,7 +1,0 @@
-<div data-hook="admin_product_form_shipping_methods">
-  <%= f.field_container :shipping_methods, class: ['form-group'] do %>
-    <%= f.label :shipping_method_id, Spree.t(:shipping_method) %>
-    <%= f.collection_select(:shipping_method_id, @shipping_methods, :id, :name, {}, { class: 'select2', disabled: (cannot? :edit, Spree::ShippingMethod) }) %>
-    <%= f.error_message_on :shipping_method %>
-  <% end %>
-</div>

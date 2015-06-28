@@ -1,5 +1,3 @@
 Spree::Product.class_eval do
-  belongs_to :shipping_method, foreign_key: :shipping_method_id, class_name: 'Spree::ShippingMethod'
-
-  validates :shipping_method, presence: true
+  validates :shipping_cost, presence: true, numericality: { greater_than_or_equal_to: 0 }
 end
