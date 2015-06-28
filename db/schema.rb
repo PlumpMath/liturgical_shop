@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150524150741) do
+ActiveRecord::Schema.define(version: 20150628173221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -451,12 +451,14 @@ ActiveRecord::Schema.define(version: 20150524150741) do
     t.datetime "updated_at",                          null: false
     t.boolean  "promotionable",        default: true
     t.string   "meta_title"
+    t.integer  "shipping_method_id"
   end
 
   add_index "spree_products", ["available_on"], name: "index_spree_products_on_available_on", using: :btree
   add_index "spree_products", ["deleted_at"], name: "index_spree_products_on_deleted_at", using: :btree
   add_index "spree_products", ["name"], name: "index_spree_products_on_name", using: :btree
   add_index "spree_products", ["shipping_category_id"], name: "index_spree_products_on_shipping_category_id", using: :btree
+  add_index "spree_products", ["shipping_method_id"], name: "index_spree_products_on_shipping_method_id", using: :btree
   add_index "spree_products", ["slug"], name: "index_spree_products_on_slug", unique: true, using: :btree
   add_index "spree_products", ["tax_category_id"], name: "index_spree_products_on_tax_category_id", using: :btree
 
