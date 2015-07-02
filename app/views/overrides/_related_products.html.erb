@@ -1,0 +1,4 @@
+<% if @product.has_related_products?('Akcesoria') %>
+  <h3><%= Spree.t(:related_products) %></h3>
+  <%= render partial: 'spree/shared/products', locals: { products: @product.akcesoria, taxon: @taxon } %>
+<% end %>
