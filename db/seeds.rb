@@ -3,7 +3,7 @@ ActiveRecord::Base.logger = nil
 
 gemspec = Gem.loaded_specs['spree_core']
 seed_dir = File.join(gemspec.gem_dir, 'db', 'default', 'spree')
-%w( countries roles states zones stores).each do |file|
+%w( countries roles states stores).each do |file|
   load File.join(seed_dir, file + '.rb')
 end
 country_poland = Spree::Country.where(iso: "PL").first
@@ -11,6 +11,11 @@ Spree::Config[:currency] = 'PLN'
 Spree::Config[:track_inventory_levels] = true
 Spree::Config[:allow_guest_checkout] = false
 Spree::Config[:default_country_id] = country_poland.id
+
+# zones
+zone_pln = Spree::Zone.find_or_create_by!(name: 'PLN', kind: 'country') do |zone|
+  zone.countries = [country_poland]
+end
 
 # categories and taxonomies
 categories = Spree::Taxonomy.find_or_create_by!(name: 'Kategorie')
@@ -49,3 +54,18 @@ Spree::StockLocation.find_or_create_by!(
   active: true,
   backorderable_default: true
 )
+
+# shippings
+shipping_category = Spree::ShippingCategory.where(name: 'Default').first_or_create!
+shipping_method = Spree::ShippingMethod.create!(
+    name: 'Kurier',
+    zones: [zone_pln],
+    tax_category: tax,
+    calculator: MostExpensiveShippingCalculator.create!,
+    shipping_categories: [shipping_category],
+    display_on: :both
+)
+
+# payment methods
+payment_cod = Spree::PaymentMethod::Check.create!(name: 'Płatność przy odbiorze', active: true, display_on: :both)
+
