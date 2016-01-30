@@ -57,11 +57,12 @@ Spree::StockLocation.find_or_create_by!(
 
 # shippings
 shipping_category = Spree::ShippingCategory.where(name: 'Default').first_or_create!
+shipping_calculator = Spree::Calculator::Shipping::BiggestShippingCost.create!
 shipping_method = Spree::ShippingMethod.create!(
     name: 'Kurier',
     zones: [zone_pln],
     tax_category: tax,
-    calculator: MostExpensiveShippingCalculator.create!,
+    calculator: shipping_calculator,
     shipping_categories: [shipping_category],
     display_on: :both
 )

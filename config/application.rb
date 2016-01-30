@@ -38,7 +38,7 @@ module LiturgicalShop
 
     # Override list of shipping calculators
     initializer 'spree.register.calculators' do |app|
-      app.config.spree.calculators.shipping_methods = [MostExpensiveShippingCalculator]
+      app.config.spree.calculators.shipping_methods = [Spree::Calculator::Shipping::BiggestShippingCost]
     end
   end
 end
